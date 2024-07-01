@@ -1,0 +1,106 @@
+
+/**
+ * Write a description of class HomePageFrame here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class HomePageFrame extends JFrame implements ActionListener
+{
+    private JFrame homePageFrame;
+    private JButton btnFresh, btnDeli, btnFrozen, btnMeat, btnDairy, btnJunk, btnContinue;
+    private JPanel aislePanel, otherpanel;
+    private JLabel txtlabel;
+
+    HomePageFrame(){
+        homePageFrame = new JFrame();
+        homePageFrame.setTitle("Home Page - Current Stocks status");
+        homePageFrame.setSize(500,500);
+        homePageFrame.setDefaultCloseOperation(homePageFrame.EXIT_ON_CLOSE);
+        homePageFrame.setLayout(new BorderLayout());
+        homePageFrame.setVisible(true);
+
+        txtlabel = new JLabel("Select one of the categories");
+
+        aislePanel = new JPanel();
+        aislePanel.setLayout(new GridLayout(4,2));
+        otherpanel = new JPanel();
+
+        btnFresh = new JButton("Fresh Products");
+        btnDeli = new JButton("Deli and Prepared");
+        btnFrozen = new JButton("Frozen Products"); 
+        btnMeat = new JButton("Meat and Seafood");
+        btnDairy = new JButton("Dairy and Refrigerated Products"); 
+        btnJunk = new JButton("Snack and Chip");
+        btnContinue = new JButton("Continue");
+    
+        btnFresh.addActionListener(this);
+        btnDeli.addActionListener(this);
+        btnFrozen.addActionListener(this);
+        btnMeat.addActionListener(this);
+        btnDairy.addActionListener(this);
+        btnJunk.addActionListener(this);
+        btnContinue.addActionListener(this);
+
+        aislePanel.add(btnFresh);
+        aislePanel.add(btnDeli);
+        aislePanel.add(btnFrozen);
+        aislePanel.add(btnMeat);
+        aislePanel.add(btnDairy);
+        aislePanel.add(btnJunk);
+        otherpanel.add(txtlabel);
+
+        homePageFrame.add(otherpanel, BorderLayout.NORTH);
+        homePageFrame.add(aislePanel, BorderLayout.CENTER);
+        homePageFrame.add(btnContinue, BorderLayout.SOUTH);
+        setLocationRelativeTo(null);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnContinue)
+        {
+            homePageFrame.dispose();
+            //move to another frame(tba)
+        }
+
+        if(e.getSource()==btnFresh)
+        {
+            Fresh fresh = new Fresh();
+            fresh.getContent();
+        }
+        else if(e.getSource()==btnDeli)
+        {
+            Deli deli = new Deli();
+            deli.getContent();
+        }
+        else if(e.getSource()==btnFrozen)
+        {
+            Frozen frozen = new Frozen();
+            frozen.getContent();
+        }
+        else if(e.getSource()==btnMeat)
+        {
+            Meat meat = new Meat();
+            meat.getContent();
+        }
+        else if(e.getSource()==btnDairy)
+        {
+            Dairy dairy = new Dairy();
+            dairy.getContent();
+        }
+        else if(e.getSource()==btnJunk)
+        {
+            Junk junk = new Junk();
+            junk.getContent();
+        }
+
+    }
+
+    public static void main(String[]args){
+        HomePageFrame test = new HomePageFrame();
+    }
+}
