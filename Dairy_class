@@ -1,0 +1,61 @@
+/**
+ * Write a description of class Fresh here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ * 
+ **/
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Random;
+
+public class Dairy extends JFrame implements Categories, ActionListener
+{   
+    private JLabel lowFatMilk, fullMilk, yogurt, butter, eggs, creamCheese;
+    private JPanel stockPanel;
+    private JButton btnBack;
+    private JFrame categoryFrame;
+    private Random randomNum;
+
+    @Override
+    public void getContent() {
+        categoryFrame = new JFrame("Quantity");
+        categoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        categoryFrame.setSize(500,500);
+        categoryFrame.setLayout(new BorderLayout());
+        categoryFrame.setVisible(true);
+
+        randomNum = new Random();
+        JLabel[] labels = {
+                new JLabel("Low Fat Milk: " + randomNum.nextInt(31)),
+                new JLabel("Full Cream Milk: " + randomNum.nextInt(31)),
+                new JLabel("Yogurt: " + randomNum.nextInt(31)),
+                new JLabel("Butter: " + randomNum.nextInt(31)),
+                new JLabel("Egg: " + randomNum.nextInt(31)),
+                new JLabel("Cream Cheese: " + randomNum.nextInt(31)),
+            };
+            
+        btnBack = new JButton("Go Back");
+        btnBack.addActionListener(this);
+
+        stockPanel = new JPanel();
+        stockPanel.setLayout(new BoxLayout(stockPanel, BoxLayout.Y_AXIS));
+        stockPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        for (JLabel label : labels) {
+            label.setFont(new Font("Arial", Font.PLAIN, 16)); // Set font and size
+            label.setAlignmentX(Component.LEFT_ALIGNMENT); // Align labels to the left
+            stockPanel.add(label);
+            stockPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Add spacing between labels
+        }
+        
+        stockPanel.add(btnBack);
+        
+        categoryFrame.add(stockPanel, BorderLayout.CENTER);
+    }
+    public void actionPerformed(ActionEvent e){
+        categoryFrame.dispose();
+    }
+}
