@@ -1,0 +1,62 @@
+
+/**
+ * THIS PROGRAM IS THE WELCOME PAGE FOR THE USER
+ *
+ * @author (AFIZUDIN FIRDAUS)
+ * @version (DATE:25/6/24)
+ */
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class WelcomePageFrame extends JFrame implements ActionListener
+{
+   private JFrame frame;
+   private JPanel panelImage, panelButton;
+   private JButton btnStart, btnCancel;
+   private JLabel labelImage;
+   
+   public WelcomePageFrame() {
+       frame = new JFrame();
+       frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+       frame.setTitle("WELCOME PAGE");
+       frame.setSize(500, 500);
+       frame.setLayout(new BorderLayout());
+       frame.setVisible(true);
+       
+       panelImage = new JPanel();
+       panelButton = new JPanel();
+       
+       labelImage = new JLabel();
+       labelImage.setIcon(new ImageIcon("image.png"));
+       panelImage.add(labelImage);
+       panelImage.setBackground(Color.WHITE);
+       
+       btnStart = new JButton("START");
+       btnCancel = new JButton("CANCEL");
+       
+       panelButton.add(btnStart);
+       panelButton.add(btnCancel);
+       
+       frame.add(panelImage, BorderLayout.CENTER);
+       frame.add(panelButton, BorderLayout.SOUTH);
+       
+       btnStart.addActionListener(this);
+       btnCancel.addActionListener(this);
+   }
+   
+   public void actionPerformed(ActionEvent e) {
+       if(e.getSource()==btnStart)
+       {
+           IDandPassword idandPassword = new IDandPassword();
+           SignInFrame loginPage = new SignInFrame(idandPassword.getLogInInfo());
+           frame.dispose();
+       }
+       else
+           System.exit(0);
+   }
+   
+   public static void main(String[]args) {
+        WelcomePageFrame welcomePageFrame = new WelcomePageFrame(); 
+   }
+}
