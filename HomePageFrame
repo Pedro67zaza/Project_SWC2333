@@ -8,27 +8,29 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class HomePageFrame extends JFrame implements ActionListener
 {
     private JFrame homePageFrame;
     private JButton btnFresh, btnDeli, btnFrozen, btnMeat, btnDairy, btnJunk, btnContinue;
-    private JPanel aislePanel, otherpanel;
+    private JPanel aislePanel, otherpanel, bottomPanel;
     private JLabel txtlabel;
+    private Random randomNum;
 
     HomePageFrame(){
         homePageFrame = new JFrame();
         homePageFrame.setTitle("Home Page - Current Stocks status");
-        homePageFrame.setSize(500,500);
-        homePageFrame.setDefaultCloseOperation(homePageFrame.EXIT_ON_CLOSE);
+        homePageFrame.setSize(420,420);
         homePageFrame.setLayout(new BorderLayout());
-        homePageFrame.setVisible(true);
 
         txtlabel = new JLabel("Select one of the categories");
 
         aislePanel = new JPanel();
-        aislePanel.setLayout(new GridLayout(4,2));
+        aislePanel.setBounds(30,20,10,10);
         otherpanel = new JPanel();
+        bottomPanel = new JPanel();
+        bottomPanel.setBounds(0,0,20,30);
 
         btnFresh = new JButton("Fresh Products");
         btnDeli = new JButton("Deli and Prepared");
@@ -37,7 +39,7 @@ public class HomePageFrame extends JFrame implements ActionListener
         btnDairy = new JButton("Dairy and Refrigerated Products"); 
         btnJunk = new JButton("Snack and Chip");
         btnContinue = new JButton("Continue");
-    
+
         btnFresh.addActionListener(this);
         btnDeli.addActionListener(this);
         btnFrozen.addActionListener(this);
@@ -53,18 +55,22 @@ public class HomePageFrame extends JFrame implements ActionListener
         aislePanel.add(btnDairy);
         aislePanel.add(btnJunk);
         otherpanel.add(txtlabel);
+        bottomPanel.add(btnContinue);
 
         homePageFrame.add(otherpanel, BorderLayout.NORTH);
         homePageFrame.add(aislePanel, BorderLayout.CENTER);
-        homePageFrame.add(btnContinue, BorderLayout.SOUTH);
+        homePageFrame.add(bottomPanel, BorderLayout.SOUTH);
         setLocationRelativeTo(null);
+
+        homePageFrame.setVisible(true);
+        homePageFrame.setDefaultCloseOperation(homePageFrame.EXIT_ON_CLOSE);
     }
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnContinue)
-        {
+        {   
             homePageFrame.dispose();
-            //move to another frame(tba)
+            Resupply resupply = new Resupply();
         }
 
         if(e.getSource()==btnFresh)
