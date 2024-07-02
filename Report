@@ -1,0 +1,46 @@
+
+/**
+ * Write a description of class Report here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+import java.awt.*;
+import javax.swing.*;
+
+public class Report
+{
+    private JLabel lblTitle, lblSupplierTitle, lblMonthTitle, lblDateTitle;
+    private JFrame reportFrame;
+    private JPanel contentPanel, titlePanel;
+
+    public Report(String selectedSupplier, String selectedMonth, int selectedDeliveryDate) {
+        reportFrame = new JFrame("Summary of the Order");
+        reportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        reportFrame.setSize(600, 400);
+        reportFrame.setLayout(new BorderLayout());
+        reportFrame.setVisible(true);
+
+        lblTitle = new JLabel("--------------------SUMMARY OF THE ORDER--------------------");
+        lblTitle.setFont(new Font("Arial", Font.BOLD, 15));
+        titlePanel = new JPanel();
+        titlePanel.add(lblTitle);
+
+        lblSupplierTitle = new JLabel("Supplier: "+selectedSupplier);
+        lblMonthTitle = new JLabel("Month of delivery: "+selectedMonth);
+        lblDateTitle = new JLabel("Delivery Date: "+Integer.toString(selectedDeliveryDate));
+        
+        contentPanel = new JPanel();
+        contentPanel.setBounds(10,10,20,20);
+        contentPanel.setLayout(new GridLayout(3, 2, 5, 5));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        contentPanel.add(lblSupplierTitle);
+        contentPanel.add(lblMonthTitle);
+        contentPanel.add(lblDateTitle);
+
+        reportFrame.add(titlePanel, BorderLayout.NORTH);
+        reportFrame.add(contentPanel, BorderLayout.CENTER);
+    }
+
+}
