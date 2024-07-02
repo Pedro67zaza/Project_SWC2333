@@ -17,27 +17,28 @@ public class WelcomePageFrame extends JFrame implements ActionListener
    private JLabel labelImage;
    
    public WelcomePageFrame() {
+       //Create the frame
        frame = new JFrame();
-       frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
        frame.setTitle("WELCOME PAGE");
        frame.setSize(500, 500);
        frame.setLayout(new BorderLayout());
+       frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
        frame.setVisible(true);
-       
+       //instantiate the panels
        panelImage = new JPanel();
        panelButton = new JPanel();
-       
+       //add image to the label
        labelImage = new JLabel();
        labelImage.setIcon(new ImageIcon("image.png"));
        panelImage.add(labelImage);
        panelImage.setBackground(Color.WHITE);
-       
+       //instantiate the buttons
        btnStart = new JButton("START");
        btnCancel = new JButton("CANCEL");
-       
+       //add buttons to panel
        panelButton.add(btnStart);
        panelButton.add(btnCancel);
-       
+       //add panels to frame
        frame.add(panelImage, BorderLayout.CENTER);
        frame.add(panelButton, BorderLayout.SOUTH);
        
@@ -49,8 +50,8 @@ public class WelcomePageFrame extends JFrame implements ActionListener
        if(e.getSource()==btnStart)
        {
            IDandPassword idandPassword = new IDandPassword();
-           SignInFrame loginPage = new SignInFrame(idandPassword.getLogInInfo());
-           frame.dispose();
+           SignInFrame loginPage = new SignInFrame(idandPassword.getLogInInfo());//open the sign in frame
+           frame.dispose();//close the current frame
        }
        else
            System.exit(0);
