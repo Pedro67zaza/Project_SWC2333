@@ -1,0 +1,84 @@
+
+/**
+ * Write a description of class SignInFrame here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+import java.util.HashMap;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class SignInFrame implements ActionListener
+{
+
+    JFrame loginFrame = new JFrame();
+    JButton btnLogin = new JButton("Login");
+    JButton btnReset = new JButton("Reset");
+    JTextField userIDField = new JTextField();
+    JPasswordField userPasswordField = new JPasswordField();
+    JLabel userIDLabel = new JLabel("User ID");
+    JLabel userPasswordLabel = new JLabel("Password");
+    JLabel messageLabel = new JLabel();
+
+    HashMap<String,String> logInInfo = new HashMap<String,String>();
+
+    SignInFrame(HashMap<String,String> logInInfoOriginal) {
+        logInInfo = logInInfoOriginal;
+
+        userIDLabel.setBounds(50,100,75,25);
+        userPasswordLabel.setBounds(50,150,75,25);
+        messageLabel.setBounds(125,250,250,35);
+        messageLabel.setFont(new Font(null,Font.ITALIC,25));
+        userIDField.setBounds(125,100,200,25);
+        userPasswordField.setBounds(125,150,200,25);
+        btnLogin.setBounds(125,200,100,25);
+        btnLogin.addActionListener(this);
+        btnReset.setBounds(225,200,100,25);
+        btnReset.addActionListener(this);
+
+        loginFrame.add(userIDLabel);
+        loginFrame.add(userPasswordLabel);
+        loginFrame.add(messageLabel);
+        loginFrame.add(userIDField);
+        loginFrame.add(userPasswordField);
+        loginFrame.add(btnLogin);
+        loginFrame.add(btnReset);
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.setSize(420,420);
+        loginFrame.setLayout(null);
+        loginFrame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==btnReset) {
+            userIDField.setText("");
+            userPasswordField.setText("");
+        }
+        else if(e.getSource()==btnLogin) {
+            String userID = userIDField.getText();
+            String password = String.valueOf(userPasswordField.getPassword());
+            if(logInInfo.containsKey(userID)) {
+                if(logInInfo.get(userID).equals(password)) {
+                    messageLabel.setForeground(Color.green);
+                    messageLabel.setText("Login Successfully");
+                    loginFrame.dispose();
+                    HomePageFrame homePage = new HomePageFrame();
+                }
+                else
+                {
+                    messageLabel.setForeground(Color.red);
+                    messageLabel.setText("Wrong Password");
+                }
+            }
+            else
+            {
+                messageLabel.setForeground(Color.red);
+                messageLabel.setText("Username not found");
+            }
+        }
+    }
+
+}
