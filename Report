@@ -1,46 +1,83 @@
 
 /**
- * Write a description of class Report here.
+ * Program purpose:To produce a report of the order with the necessary info
  *
  * @author (your name)
  * @version (a version number or a date)
  */
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
-public class Report
+public class Report implements ActionListener
 {
     private JLabel lblTitle, lblSupplierTitle, lblMonthTitle, lblDateTitle;
     private JFrame reportFrame;
-    private JPanel contentPanel, titlePanel;
+    private JPanel contentPanel, titlePanel, btnPanel;
+    private JButton btnContinue, btnBack;
 
     public Report(String selectedSupplier, String selectedMonth, int selectedDeliveryDate) {
+        //create a frame 
         reportFrame = new JFrame("Summary of the Order");
         reportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         reportFrame.setSize(600, 400);
         reportFrame.setLayout(new BorderLayout());
         reportFrame.setVisible(true);
-
-        lblTitle = new JLabel("--------------------SUMMARY OF THE ORDER--------------------");
+        //create the label 
+        lblTitle = new JLabel("--------------------SUMMARY OF THE ORDER--------------------\n");
         lblTitle.setFont(new Font("Arial", Font.BOLD, 15));
-        titlePanel = new JPanel();
-        titlePanel.add(lblTitle);
-
+        JLabel lbltxt1 = new JLabel("The following are the information regarding the order that was placed.");
+        JLabel lbltxt2 = new JLabel("Please make sure all of the information are correct before proceeding.");
+        JLabel lbltxt3 = new JLabel("Thank you for your cooperation!");
+        
         lblSupplierTitle = new JLabel("Supplier: "+selectedSupplier);
         lblMonthTitle = new JLabel("Month of delivery: "+selectedMonth);
         lblDateTitle = new JLabel("Delivery Date: "+Integer.toString(selectedDeliveryDate));
+        //create the buttons
+        btnContinue = new JButton("Continue");
+        btnBack = new JButton("Go Back");
+        btnContinue.addActionListener(this);
+        btnBack.addActionListener(this);
+        //create the panels 
+        titlePanel = new JPanel();
+        titlePanel.setLayout(new GridLayout(4,1));
         
         contentPanel = new JPanel();
         contentPanel.setBounds(10,10,20,20);
         contentPanel.setLayout(new GridLayout(3, 2, 5, 5));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
+        
+        btnPanel = new JPanel();
+        btnPanel.setBounds(10,10,10,10);
+        btnPanel.setLayout(new FlowLayout());
+        //add components to the panels 
+        titlePanel.add(lblTitle);
+        titlePanel.add(lbltxt1);
+        titlePanel.add(lbltxt2);
+        titlePanel.add(lbltxt3);
+        
         contentPanel.add(lblSupplierTitle);
         contentPanel.add(lblMonthTitle);
         contentPanel.add(lblDateTitle);
-
+        
+        btnPanel.add(btnContinue);
+        btnPanel.add(btnBack);
+        //add panels to the frame 
         reportFrame.add(titlePanel, BorderLayout.NORTH);
         reportFrame.add(contentPanel, BorderLayout.CENTER);
+        reportFrame.add(btnPanel, BorderLayout.SOUTH);
     }
-
+    
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource()==btnContinue)
+        {
+            reportFrame.dispose();//close the current frame
+            UserFeedback userfeedback = new UserFeedback();//proceed to the userfeedback frame 
+        }
+        else 
+        {
+            reportFrame.dispose();
+            new Supplier();
+        }
+    }
 }
