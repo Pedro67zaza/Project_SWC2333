@@ -1,5 +1,5 @@
 /**
- * Write a description of class deli
+ * Program purpose: To provide an interface of the Deli class to be utilized in the HomePageFrame
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -21,14 +21,16 @@ public class Deli extends JFrame implements Categories, ActionListener
 
     @Override
     public void getContent() {
+        //create the frame
         categoryFrame = new JFrame("Quantity");
         categoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         categoryFrame.setSize(500,500);
         categoryFrame.setLayout(new BorderLayout());
         categoryFrame.setVisible(true);
-
+        //instantiate random object 
         randomNum = new Random();
         JLabel[] labels = {
+        //create the labels
                 new JLabel("Pepperoni: " + randomNum.nextInt(31)),
                 new JLabel("Salami: " + randomNum.nextInt(31)),
                 new JLabel("White Cheese: " + randomNum.nextInt(31)),
@@ -36,10 +38,10 @@ public class Deli extends JFrame implements Categories, ActionListener
                 new JLabel("Ham: " + randomNum.nextInt(31)),
                 new JLabel("Sausage: " + randomNum.nextInt(31)),
             };
-
+        //create the go back button
         btnBack = new JButton("Go Back");
         btnBack.addActionListener(this);
-
+        //create the panel 
         stockPanel = new JPanel();
         stockPanel.setLayout(new BoxLayout(stockPanel, BoxLayout.Y_AXIS));
         stockPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -50,13 +52,13 @@ public class Deli extends JFrame implements Categories, ActionListener
             stockPanel.add(label);
             stockPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Add spacing between labels
         }
-
+        //add the button to the panel 
         stockPanel.add(btnBack);
-
+        //add the panel to the frame 
         categoryFrame.add(stockPanel, BorderLayout.CENTER);
     }
 
     public void actionPerformed(ActionEvent e){
-        categoryFrame.dispose();
+        categoryFrame.dispose();//close current Frame 
     }
 }
