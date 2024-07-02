@@ -1,6 +1,6 @@
 
 /**
- * Write a description of class HomePageFrame here.
+ * Program purpose: To allow the user to pick a category and display the required info
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -19,19 +19,20 @@ public class HomePageFrame extends JFrame implements ActionListener
     private Random randomNum;
 
     HomePageFrame(){
+        //creating the frame
         homePageFrame = new JFrame();
         homePageFrame.setTitle("Home Page - Current Stocks status");
         homePageFrame.setSize(420,420);
         homePageFrame.setLayout(new BorderLayout());
-
+        //create the label
         txtlabel = new JLabel("Select one of the categories");
-
+        //create the panels 
         aislePanel = new JPanel();
         aislePanel.setBounds(30,20,10,10);
         otherpanel = new JPanel();
         bottomPanel = new JPanel();
         bottomPanel.setBounds(0,0,20,30);
-
+        //creating the buttons
         btnFresh = new JButton("Fresh Products");
         btnDeli = new JButton("Deli and Prepared");
         btnFrozen = new JButton("Frozen Products"); 
@@ -47,7 +48,7 @@ public class HomePageFrame extends JFrame implements ActionListener
         btnDairy.addActionListener(this);
         btnJunk.addActionListener(this);
         btnContinue.addActionListener(this);
-
+        //add components to the panels 
         aislePanel.add(btnFresh);
         aislePanel.add(btnDeli);
         aislePanel.add(btnFrozen);
@@ -56,7 +57,7 @@ public class HomePageFrame extends JFrame implements ActionListener
         aislePanel.add(btnJunk);
         otherpanel.add(txtlabel);
         bottomPanel.add(btnContinue);
-
+        //add panels to the frame
         homePageFrame.add(otherpanel, BorderLayout.NORTH);
         homePageFrame.add(aislePanel, BorderLayout.CENTER);
         homePageFrame.add(bottomPanel, BorderLayout.SOUTH);
@@ -69,44 +70,41 @@ public class HomePageFrame extends JFrame implements ActionListener
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnContinue)
         {   
-            homePageFrame.dispose();
-            Resupply resupply = new Resupply();
+            homePageFrame.dispose();//close the current page 
+            Resupply resupply = new Resupply();//open the resupply frame
         }
 
         if(e.getSource()==btnFresh)
         {
-            Fresh fresh = new Fresh();
-            fresh.getContent();
+            Fresh fresh = new Fresh();//instantiate the fresh object
+            fresh.getContent();//call the getContent method(interface) in the class
         }
         else if(e.getSource()==btnDeli)
         {
-            Deli deli = new Deli();
+            Deli deli = new Deli();//instantiate the Deli object
             deli.getContent();
         }
         else if(e.getSource()==btnFrozen)
         {
-            Frozen frozen = new Frozen();
+            Frozen frozen = new Frozen();//instantiate the frozen object
             frozen.getContent();
         }
         else if(e.getSource()==btnMeat)
         {
-            Meat meat = new Meat();
+            Meat meat = new Meat();//instantiate the meat object 
             meat.getContent();
         }
         else if(e.getSource()==btnDairy)
         {
-            Dairy dairy = new Dairy();
+            Dairy dairy = new Dairy();//instantiate the dairy object 
             dairy.getContent();
         }
         else if(e.getSource()==btnJunk)
         {
-            Junk junk = new Junk();
+            Junk junk = new Junk();//instantiate the junk object 
             junk.getContent();
         }
 
     }
 
-    public static void main(String[]args){
-        HomePageFrame test = new HomePageFrame();
-    }
 }
