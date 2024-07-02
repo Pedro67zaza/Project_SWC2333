@@ -1,0 +1,176 @@
+
+/**
+ * Write a description of class Supplier here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Supplier extends JFrame implements ItemListener, ActionListener
+{
+    private JFrame supplierFrame;
+    private JRadioButton supplier1, supplier2, supplier3, btnJan,btnFeb, btnMar, btnApr, btnMay, btnJun, btnJul, btnAug, btnSep, btnOct, btnNov, btnDec;
+    private ButtonGroup groupSupplier, groupMonth;
+    private JPanel radioPanel, monthPanel, comboBoxPanel;
+    private JComboBox<Integer> comboBoxDate;
+    private JButton btnContinue;
+    private String selectedSupplier, selectedMonth;
+    private int selectedDeliveryDate;
+
+    public Supplier() {
+        supplierFrame = new JFrame("Supplier Management");
+        supplierFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        supplierFrame.setSize(900,500);
+        supplierFrame.setLayout(new BorderLayout());
+        supplierFrame.setVisible(true);
+
+        Integer[] deliveryDate = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+
+        comboBoxDate = new JComboBox<>(deliveryDate);
+        comboBoxDate.addActionListener(this);
+
+        supplier1 = new JRadioButton("TNT Sdn.Bhd.");
+        supplier2 = new JRadioButton("ALI HABIBI Group");
+        supplier3 = new JRadioButton("GIS Distribution");
+        btnJan = new JRadioButton("January");
+        btnFeb = new JRadioButton("February");
+        btnMar = new JRadioButton("March");
+        btnApr = new JRadioButton("April");
+        btnMay = new JRadioButton("May");
+        btnJun = new JRadioButton("June");
+        btnJul = new JRadioButton("July");
+        btnAug = new JRadioButton("August");
+        btnSep = new JRadioButton("September");
+        btnOct = new JRadioButton("October");
+        btnNov = new JRadioButton("November");
+        btnDec = new JRadioButton("December");
+        btnContinue = new JButton("Continue");
+
+        supplier1.addItemListener(this);
+        supplier2.addItemListener(this);
+        supplier3.addItemListener(this);
+        btnJan.addItemListener(this);
+        btnFeb.addItemListener(this);
+        btnMar.addItemListener(this);
+        btnApr.addItemListener(this);
+        btnMay.addItemListener(this);
+        btnJun.addItemListener(this);
+        btnJul.addItemListener(this);
+        btnAug.addItemListener(this);
+        btnSep.addItemListener(this);
+        btnOct.addItemListener(this);
+        btnNov.addItemListener(this);
+        btnDec.addItemListener(this);
+        btnContinue.addActionListener(this);
+
+        groupSupplier = new ButtonGroup();
+        groupSupplier.add(supplier1);
+        groupSupplier.add(supplier2);
+        groupSupplier.add(supplier3);
+
+        groupMonth = new ButtonGroup();
+        groupMonth.add(btnJan);
+        groupMonth.add(btnFeb);
+        groupMonth.add(btnMar);
+        groupMonth.add(btnApr);
+        groupMonth.add(btnMay);
+        groupMonth.add(btnJun);
+        groupMonth.add(btnJul);
+        groupMonth.add(btnAug);
+        groupMonth.add(btnSep);
+        groupMonth.add(btnOct);
+        groupMonth.add(btnNov);
+        groupMonth.add(btnDec);
+        
+        comboBoxPanel = new JPanel();
+        comboBoxPanel.setBounds(0,20,20,20);
+        comboBoxPanel.add(comboBoxDate);
+        
+        radioPanel = new JPanel(new GridLayout(3,1));
+        radioPanel.setBounds(10,50,20,20);
+        radioPanel.add(supplier1);
+        radioPanel.add(supplier2);
+        radioPanel.add(supplier3);
+
+        monthPanel = new JPanel();
+        monthPanel.setBounds(0,0,30,30);
+        monthPanel.add(btnJan);
+        monthPanel.add(btnFeb);
+        monthPanel.add(btnMar);
+        monthPanel.add(btnApr);
+        monthPanel.add(btnMay);
+        monthPanel.add(btnJun);
+        monthPanel.add(btnJul);
+        monthPanel.add(btnAug);
+        monthPanel.add(btnSep);
+        monthPanel.add(btnOct);
+        monthPanel.add(btnNov);
+        monthPanel.add(btnDec);
+        
+        supplierFrame.add(comboBoxPanel, BorderLayout.NORTH);
+        supplierFrame.add(radioPanel, BorderLayout.WEST);
+        supplierFrame.add(monthPanel, BorderLayout.CENTER);
+        supplierFrame.add(btnContinue, BorderLayout.SOUTH);
+        
+    }
+
+    public void itemStateChanged(ItemEvent e){
+        if (e.getSource() == supplier1 && e.getStateChange() == ItemEvent.SELECTED)
+            selectedSupplier = "TNT Sdn. Bhd.";
+        else if (e.getSource() == supplier2 && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedSupplier = "ALI HABIBI Group";
+        else if (e.getSource() == supplier3 && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedSupplier = "GIS Distribution";
+
+        if (e.getSource() == btnJan && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "January";
+        else if (e.getSource() == btnFeb && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "February";
+        else if (e.getSource() == btnMar && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "March";
+        else if (e.getSource() == btnApr && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "April";
+        else if (e.getSource() == btnMay && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "May";
+        else if (e.getSource() == btnJun && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "June";
+        else if (e.getSource() == btnJul && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "July";
+        else if (e.getSource() == btnAug && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "August";
+        else if (e.getSource() == btnSep && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "September";
+        else if (e.getSource() == btnOct && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "October";
+        else if (e.getSource() == btnNov && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "November";
+        else if (e.getSource() == btnDec && e.getStateChange() == ItemEvent.SELECTED) 
+            selectedMonth = "December";
+    }
+
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource()==comboBoxDate)
+        {
+            selectedDeliveryDate = (int) comboBoxDate.getSelectedItem();
+        }
+        else if(e.getSource()==btnContinue)
+        {
+            supplierFrame.dispose();
+            Report report = new Report(selectedSupplier, selectedMonth, selectedDeliveryDate);
+            
+        }
+    }
+    public void setSelectedSupplier(String selectedSupplier){
+        selectedSupplier = this.selectedSupplier;
+    }
+    public String getSelectedSupplier(){
+        return selectedSupplier;
+    }
+    
+    public static void main(String[]args) {
+        Supplier demo = new Supplier(); 
+   }
+}
