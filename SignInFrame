@@ -1,6 +1,6 @@
 
 /**
- * Write a description of class SignInFrame here.
+ * Program purpose: To prompt the user for the ID and passwords before proceeding to the next frame
  *
  * @author (your name)
  * @version (a version number or a date)
@@ -12,15 +12,19 @@ import javax.swing.*;
 
 public class SignInFrame implements ActionListener
 {
-
-    JFrame loginFrame = new JFrame();
-    JButton btnLogin = new JButton("Login");
-    JButton btnReset = new JButton("Reset");
-    JTextField userIDField = new JTextField();
-    JPasswordField userPasswordField = new JPasswordField();
-    JLabel userIDLabel = new JLabel("User ID");
-    JLabel userPasswordLabel = new JLabel("Password");
-    JLabel messageLabel = new JLabel();
+    //Create a frame
+    private JFrame loginFrame = new JFrame();
+    //create the buttons
+    private JButton btnLogin = new JButton("Login");
+    private JButton btnReset = new JButton("Reset");
+    private JButton btnGuest = new JButton("Guest");
+    //create the textfields
+    private JTextField userIDField = new JTextField();
+    private JPasswordField userPasswordField = new JPasswordField();
+    //create the Labels
+    private JLabel userIDLabel = new JLabel("User ID");
+    private JLabel userPasswordLabel = new JLabel("Password");
+    private JLabel messageLabel = new JLabel();
 
     HashMap<String,String> logInInfo = new HashMap<String,String>();
 
@@ -31,29 +35,36 @@ public class SignInFrame implements ActionListener
         userPasswordLabel.setBounds(50,150,75,25);
         messageLabel.setBounds(125,250,250,35);
         messageLabel.setFont(new Font(null,Font.ITALIC,25));
+
         userIDField.setBounds(125,100,200,25);
         userPasswordField.setBounds(125,150,200,25);
+
         btnLogin.setBounds(125,200,100,25);
         btnLogin.addActionListener(this);
         btnReset.setBounds(225,200,100,25);
         btnReset.addActionListener(this);
-
+        btnGuest.setBounds(25,200,100,25);
+        btnGuest.addActionListener(this);
+        //add components to the frame
         loginFrame.add(userIDLabel);
         loginFrame.add(userPasswordLabel);
         loginFrame.add(messageLabel);
         loginFrame.add(userIDField);
         loginFrame.add(userPasswordField);
+        loginFrame.add(btnGuest);
         loginFrame.add(btnLogin);
         loginFrame.add(btnReset);
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         loginFrame.setSize(420,420);
         loginFrame.setLayout(null);
         loginFrame.setVisible(true);
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnReset) {
+            //empty the text fields
             userIDField.setText("");
             userPasswordField.setText("");
         }
@@ -64,8 +75,8 @@ public class SignInFrame implements ActionListener
                 if(logInInfo.get(userID).equals(password)) {
                     messageLabel.setForeground(Color.green);
                     messageLabel.setText("Login Successfully");
-                    loginFrame.dispose();
-                    HomePageFrame homePage = new HomePageFrame();
+                    loginFrame.dispose();//close the current frame
+                    HomePageFrame homePage = new HomePageFrame();//open the new home page frame
                 }
                 else
                 {
@@ -78,6 +89,10 @@ public class SignInFrame implements ActionListener
                 messageLabel.setForeground(Color.red);
                 messageLabel.setText("Username not found");
             }
+        }
+        else    {
+            loginFrame.dispose();//close the current frame
+            HomePageFrame homePage = new HomePageFrame();//open the home page frame
         }
     }
 
